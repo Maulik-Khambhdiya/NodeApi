@@ -6,11 +6,12 @@ exports.createData = async (req, res) => {
   try {
     let data = req.body;
     data.password= await bcrypt.hash(data.password,10)   //promises handle
+    data.profile= req.file.filename            // for create image data
+
+     // add images before data create api
 
     const userData = await API.create(req.body);   //promises handle
-    data.profile= req.file.filename            // for create image data
-    
-
+  
     res.status(201).json({
       status: "success",
       message: "Data create successfully",
