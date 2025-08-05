@@ -8,7 +8,7 @@ const mongoose=require('mongoose')
 mongoose.connect("mongodb://localhost:27017/nodeApi")
 .then(()=>{
   console.log("connection success")
-})
+}) 
 .catch((error)=>{
   console.log(error);
   
@@ -16,7 +16,7 @@ mongoose.connect("mongodb://localhost:27017/nodeApi")
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const apiRouter = require('./routes/api');    // api router <<<<<<<==>>>>>>>>>
+const apiRouter = require('./routes/api');    // api router <<<<<<<<<==>>>>>>>>>
 
 
 var app = express();
