@@ -26,5 +26,6 @@ apiRouter.post('/',upload.single('profile'),AC.createData)
 apiRouter.get('/',AC.viewData)
 apiRouter.delete('/:id',AC.deleteData)
 apiRouter.patch('/:id',AC.editData)
+apiRouter.post('/login',AC.loginUser)  // login
  
 module.exports = apiRouter

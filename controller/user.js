@@ -1,23 +1,24 @@
 let API = require("../model/user");
 const nodemailer = require("nodemailer");
+const jwt= require('jsonwebtoken')
 
 let bcrypt = require("bcrypt"); //password generator
 
 exports.createData = async (req, res) => {
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: "smtp.gmail.com", // -change its required gmail.com
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: "maulik.cdmi@gmail.com",
-      pass: "gqzosfnxwnnaydmo",
+      user: "maulik.cdmi@gmail.com", // generated email
+      pass: "gqzosfnxwnnaydmo", // generated password
     },
   });
 
   const sendMail = async (email) => {
     const info = await transporter.sendMail({
-      from: "maulik.cdmi@gmail.com",
-      to: email,
+      from: "maulik.cdmi@gmail.com", // sender address
+      to: email, // list of receivers
       subject: "Hello ✔",
       text: "Hello world?", // plain‑text body
       html: "<b>Hello world?</b>", // HTML body
@@ -113,3 +114,33 @@ exports.editData = async (req, res) => {
     });
   }
 };
+
+
+
+exports.loginUser = async (req, res) => {
+
+    try {
+        const emailVerify = await API.findOne({ email: req.body.email })
+
+        if (!emailVerify) throw new Error("Invalid email")
+
+        const passVerify = await bcrypt.compare(req.body.password, emailVerify.password)
+
+        if (!passVerify) throw new Error('Invalid password')
+
+        const token = jwt.sign({ id: emailVerify._id }, 'surat')
+
+        res.status(200).json({
+            status: 'Success',
+            message: 'Login Successfully',
+            loginUser: emailVerify,
+            token
+        })
+
+    } catch (error) {
+        res.status(404).json({
+            status: 'Fail',
+            message: error.message
+        })
+    }
+}
