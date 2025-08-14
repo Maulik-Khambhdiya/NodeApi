@@ -24,9 +24,9 @@ const upload = multer({ storage: storage })
 let AC = require('../controller/user')
 
 apiRouter.post('/',upload.single('profile'),AC.createData)
-apiRouter.get('/',AM.autCheck,AC.viewData)                                 
-apiRouter.delete('/:id',AM.autCheck,AC.deleteData)
-apiRouter.patch('/:id',AM.autCheck,AC.editData)
+apiRouter.get('/',AM.authCheck,AC.viewData)                                 
+apiRouter.delete('/:id',AM.authCheck,AC.deleteData)
+apiRouter.patch('/:id',AM.authCheck,AC.editData)
 apiRouter.post('/login',AC.loginUser)  // login
  
 module.exports = apiRouter

@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
-const USER = require("../model/api");
+const USER = require("../model/user");
 exports.authCheck = async (req, res, next) => {
   // console.log("======");
 
   try {
+    
     const token = req.headers.authorization;
     // console.log(token);
 

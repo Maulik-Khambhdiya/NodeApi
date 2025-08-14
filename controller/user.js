@@ -50,7 +50,7 @@ exports.createData = async (req, res) => {
   }
 };
 
-exports.viewData = async (req, res) => {
+exports.viewData = async (req,res) => {
   try {
     const allData = await API.find(); //promises handle
     res.status(200).json({
@@ -66,7 +66,7 @@ exports.viewData = async (req, res) => {
   }
 };
 
-exports.deleteData = async (req, res) => {
+exports.deleteData = async (req,res) => {
   try {
     const deleteId = req.params.id;
 
