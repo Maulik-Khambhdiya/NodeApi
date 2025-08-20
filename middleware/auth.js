@@ -12,6 +12,9 @@ exports.authCheck = async (req, res, next) => {
 
     const tokenVerify = jwt.verify(token, "surat");
 
+    console.log("===>",tokenVerify);
+    
+
     console.log(tokenVerify);
 
     if (!tokenVerify) throw new Error("Invalid token");
@@ -21,6 +24,7 @@ exports.authCheck = async (req, res, next) => {
     if (!userVerify) throw new Error("Invalid User");
 
     next();
+    
   } catch (error) {
     res.status(404).json({
       status: "Fail",

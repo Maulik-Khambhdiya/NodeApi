@@ -1,8 +1,8 @@
 let API = require("../model/user");
 const nodemailer = require("nodemailer");
-const jwt= require('jsonwebtoken')
+const jwt= require('jsonwebtoken') // generate token
 
-let bcrypt = require("bcrypt"); //password generator
+let bcrypt = require("bcrypt"); //password convertor
 
 exports.createData = async (req, res) => {
   const transporter = nodemailer.createTransport({
@@ -15,7 +15,7 @@ exports.createData = async (req, res) => {
     },
   });
 
-  const sendMail = async (email) => {
+  const sendMail = async (email) => {     //remove Immidiatly invoke function and add const sendmail
     const info = await transporter.sendMail({
       from: "maulik.cdmi@gmail.com", // sender address
       to: email, // list of receivers
@@ -41,6 +41,7 @@ exports.createData = async (req, res) => {
       status: "success",
       message: "Data create successfully",
       data: userData,
+      
     });
   } catch (error) {
     res.status(404).json({
